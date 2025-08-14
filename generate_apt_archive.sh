@@ -8,7 +8,7 @@ ARCH="${ARCH:-amd64}"
 GPG_KEY_ID="${GPG_KEY_ID:-0A610B2368A29622A7F4FD3AA887F3BAF5C4FB6C}"
 GPG_SIGN="${GPG_SIGN:-true}"
 GPG_PASSPHRASE="${GPG_PASSPHRASE:-}"
-GPG_PASSPHRASE_FILE="${GPG_PASSPHRASE_FILE:-".secrets/gpg_passphrase"}"
+GPG_PASSPHRASE_FILE="${GPG_PASSPHRASE_FILE:-$(pwd)/.secrets/gpg_passphrase}"
 
 CODENAME_DIST_PATH="$REPO_ROOT/dists/$DIST_CODENAME"
 ARCH_DIST_PATH="$CODENAME_DIST_PATH/main/binary-$ARCH"
@@ -17,6 +17,25 @@ CONFIG_FILE="${CONFIG_FILE:-$(pwd)/apt-ftparchive.conf}"
 function create_dirs() {
     mkdir -p $CODENAME_DIST_PATH
     mkdir -p $ARCH_DIST_PATH
+}
+
+function enable_loopback_pinentry() {
+    local gnupg_dir="$HOME/.gnupg"
+    local agent_conf="$gnupg_dir/gpg-agent.conf"
+
+    mkdir -p "$gnupg_dir"
+    chmod 700 "$gnupg_dir"
+
+    if [ -f "$agent_conf" ]; then
+        if ! grep -q '^allow-loopback-pinentry' "$agent_conf"; then
+            echo 'allow-loopback-pinentry' >> "$agent_conf"
+        fi
+    else
+        echo 'allow-loopback-pinentry' > "$agent_conf"
+    fi
+    chmod 600 "$agent_conf"
+
+    gpgconf --kill gpg-agent || true
 }
 
 function create_config() {
@@ -53,8 +72,10 @@ function sign_release() {
     set +x
     local gpg_flags=(--batch --yes --pinentry-mode=loopback -u "$GPG_KEY_ID")
     if [ -n "$GPG_PASSPHRASE_FILE" ] && [ -f "$GPG_PASSPHRASE_FILE" ]; then
+        enable_loopback_pinentry
         gpg_flags+=(--passphrase-file "$GPG_PASSPHRASE_FILE")
     elif [ -n "$GPG_PASSPHRASE" ]; then
+        enable_loopback_pinentry
         gpg_flags+=(--passphrase "$GPG_PASSPHRASE")
     fi
     gpg "${gpg_flags[@]}" -abs -o "$CODENAME_DIST_PATH/Release.gpg" "$CODENAME_DIST_PATH/Release"

@@ -1,0 +1,42 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Architectures: amd64
+Codename: jammy
+Components: main
+Date: Thu, 14 Aug 2025 10:18:23 +0000
+Label: Hyeokjune's Packages
+Origin: Hyeokjune's APT Repo
+Suite: jammy
+MD5Sum:
+ 7f36c15d190cc454214513b4c3ffc488              162 Release
+ 82705e8994d648044d9fc7ebd3120322              669 main/binary-amd64/Packages
+ 9d3c8d9dbef20cb622633b5061443ea0              485 main/binary-amd64/Packages.gz
+SHA1:
+ bcbe2ce52f47c87ef21bf05543fbf19808cfdcce              162 Release
+ ae1718b77c5498ff94d1c6fbf3348a40a8853096              669 main/binary-amd64/Packages
+ dd7d6e21d4f0c833e9c3e41ab70c0b3ea6281637              485 main/binary-amd64/Packages.gz
+SHA256:
+ b10151815243c0160f489c1d3db57805ba8784f9282b0a7807414d7160df4711              162 Release
+ ee5a0fdceec747f078be40fe2ff1e42f7ad8f6732f221241c04b0e971e6662f7              669 main/binary-amd64/Packages
+ 5fc64a57cb5351dc229e92b87ed3cf6e6ef8432387ce7750e17431b541860b43              485 main/binary-amd64/Packages.gz
+SHA512:
+ e618851a2eb54d78d5fcb01b3136140bafe4d75b05f5976a0137f8d624184c7bc6626f7cde72d6fe7098b03c1f6533143ec2ba40d5575fb9b975e5d16272a9e4              162 Release
+ 15c7d3dd1a3ff9dbfea854dd2f0ef284e051be7130a79dfddec031cd7889f2f18c3b35e746660d97a28277be51867dbcf5a39f50cab6e714c415e778aa86e302              669 main/binary-amd64/Packages
+ f690d8c1d53a83a4e2832cc60f33f3c8b044eda6c789ad6b9d8716bd785eb9eac5b46e8f5cbb230b8fa0fdbfb97653e26df11fb1876626d7739eebffabb3ae52              485 main/binary-amd64/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEECmELI2iiliKn9P06qIfzuvXE+2wFAmidt+8ACgkQqIfzuvXE
++2x5RRAA828Dd1aaw0K68R09hoWC//i8gla+iWMS5U15N+l5SSgfn5/RC5QoFlPe
++1bIdNlk2oSOqpGNcbAlyPOaB+t/J+iJWFoE4+bWthcofjxEw5zgXYrPembg9qzq
+i6GEIsm9LABqi9qBMT4eXlR46q3yjDKPoOEPhGrNTNuKzyxLeeic1vHN7dNE3p0+
+5KtdlJPlskTT/F8ZqYcAQFUHaK7TmDyWicUe/XGYKeqORYEdJ0+Km2/75qJQ1nS5
+egX85ujJKyRLMOJ5tG4RcyZRx8gcPxPIeAUTLFJfZVAOA6rSUJuhjiF8wNy2nV8a
+s4v/oAu+pGjnFqW4b1ozggiAAN0PSVOUrKrukrXQRCtHJZuf9LROon6ANof8l/8N
+nvh3NhOImF0ssZ91F88NEezTQRrEwTzmUs157lnQXfhNkPyISFUhT+J4+ik73ly9
+MShbIG508SyekyAeXDp04ooUqihNBh3HzQMthii8Sxm/Cdof80uLXtGIydXpQ7HA
+toahcQZJ3r/rMC1Z7TpmSQd/A2azUCwNjntscmnLc/x2KJyvtsm37AKgBrNx/nH5
+FLXmKGgZEhTZz0TiWcLC9HeRAephPk4Z325JRd7hKiD6LHVmILIGO/buJQDUV/P/
+6HchH/9KZOOH/hZqheMF4UC02m1ClSVHvqExowQ7nlhDwLvp2F0=
+=NlK+
+-----END PGP SIGNATURE-----
