@@ -1,3 +1,62 @@
-<html>
-	<body>hello</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple APT Repository</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: #111;
+            background: #fff;
+        }
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 32px 20px 64px;
+        }
+        .readme h1, .readme h2, .readme h3 {
+            margin-top: 1.6em;
+        }
+        .readme pre {
+            background: #f6f8fa;
+            padding: 12px 14px;
+            overflow: auto;
+            border-radius: 6px;
+        }
+        .readme code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+        .muted {
+            color: #6a737d;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="muted">Apple APT Repository</div>
+        <div id="readme" class="readme">README.md 로드 중…</div>
+        <noscript>JavaScript가 비활성화되어 있어 README를 렌더링할 수 없습니다.</noscript>
+    </div>
+
+    <script>
+        (function loadReadme() {
+            fetch('README.md', { cache: 'no-cache' })
+                .then(function(response) {
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    return response.text();
+                })
+                .then(function(markdownText) {
+                    var html = marked.parse(markdownText, { mangle: false, headerIds: false });
+                    document.getElementById('readme').innerHTML = html;
+                })
+                .catch(function(error) {
+                    document.getElementById('readme').innerHTML = '<p>README.md를 불러오지 못했습니다. 서버로 제공될 때 동작합니다.</p>';
+                    if (window && window.console) console.error('Failed to load README.md:', error);
+                });
+        })();
+    </script>
+</body>
 </html>
