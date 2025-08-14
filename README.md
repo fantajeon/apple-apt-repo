@@ -6,17 +6,17 @@
 ### HTTP/HTTPS 원격 저장소로 사용하기
 1) 키링 경로 설정 및 공개키 등록
 ```bash
-KEYRING=/usr/share/keyrings/hyeokjune-archive-keyring.gpg
-HOST=<여기에_호스트_또는_도메인 # 예: repo.example.com>
+KEYRING=/usr/share/keyrings/apple-apt-archive-keyring.gpg
 
-sudo curl -fsSL "http://$HOST/ubuntu/public_key.asc" \
+sudo curl -fsSL "http://fantajeon.github.io/apt-repo/ubuntu/public_key.asc" \
   | sudo gpg --dearmor -o "$KEYRING"
 ```
 
 2) 소스 리스트 추가
 ```bash
-echo "deb [arch=amd64 signed-by=$KEYRING] http://$HOST/ubuntu jammy main" \
-  | sudo tee /etc/apt/sources.list.d/hyeokjune-archive.list
+LIST=/etc/apt/sources.list.d/apple-apt.list
+echo "deb [arch=amd64 signed-by=$KEYRING] http://fantajeon.github.io/apt-repo/ubuntu jammy main" \
+  | sudo tee "$LIST"
 ```
 
 3) 갱신 및 설치
@@ -28,8 +28,10 @@ sudo apt install apt-oauth2-proxy
 ### 로컬 파일 시스템에서 사용하기
 1) 소스 리스트 추가(예시 경로는 환경에 맞게 수정)
 ```bash
+REPO_ID=apple-apt
+LIST=/etc/apt/sources.list.d/${REPO_ID}.list
 echo "deb [arch=amd64 trusted=yes] file:/home/furiosa/hyeokjune/apt-repo/ubuntu jammy main" \
-  | sudo tee /etc/apt/sources.list.d/hyeokjune-archive.list
+  | sudo tee "$LIST"
 ```
 
 2) 갱신 및 설치
@@ -46,15 +48,10 @@ apt-cache policy apt-oauth2-proxy
 ### 제거(정리)
 원격 저장소 사용 시 키/소스 제거:
 ```bash
-sudo rm -f /etc/apt/sources.list.d/hyeokjune-archive.list
-sudo rm -f /usr/share/keyrings/hyeokjune-archive-keyring.gpg
+REPO_ID=apple-apt
+LIST=/etc/apt/sources.list.d/${REPO_ID}.list
+KEYRING=/usr/share/keyrings/${REPO_ID}-archive-keyring.gpg
+sudo rm -f "$LIST"
+sudo rm -f "$KEYRING"
 sudo apt update
 ```
-
-로컬 저장소 사용 시 소스만 제거:
-```bash
-sudo rm -f /etc/apt/sources.list.d/hyeokjune-archive.list
-sudo apt update
-```
-
-
