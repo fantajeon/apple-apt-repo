@@ -6,10 +6,12 @@
 ### Use over HTTP/HTTPS
 1) Install the repository public key (keyring)
 ```bash
-KEYRING=/usr/share/keyrings/apple-apt-archive-keyring.gpg
+KEYRING=/etc/apt/keyrings/apple-apt-archive-keyring.gpg
 
+sudo install -d -m 0755 /etc/apt/keyrings
 sudo curl -fsSL "http://fantajeon.github.io/apple-apt-repo/ubuntu/public_key.asc" \
   | sudo gpg --dearmor -o "$KEYRING"
+sudo chmod 0644 "$KEYRING"
 ```
 
 2) Add an APT source list entry
@@ -41,7 +43,7 @@ Remove key and source list:
 ```bash
 REPO_ID=apple-apt
 LIST=/etc/apt/sources.list.d/${REPO_ID}.list
-KEYRING=/usr/share/keyrings/${REPO_ID}-archive-keyring.gpg
+KEYRING=/etc/apt/keyrings/${REPO_ID}-archive-keyring.gpg
 sudo rm -f "$LIST"
 sudo rm -f "$KEYRING"
 sudo apt update

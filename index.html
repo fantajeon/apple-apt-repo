@@ -87,10 +87,12 @@
 <ol type="1">
 <li>Install the repository public key (keyring)</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="va">KEYRING=</span>/usr/share/keyrings/apple-apt-archive-keyring.gpg</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="va">KEYRING=</span>/etc/apt/keyrings/apple-apt-archive-keyring.gpg</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="fu">sudo</span> curl -fsSL <span class="st">&quot;http://fantajeon.github.io/apple-apt-repo/ubuntu/public_key.asc&quot;</span> <span class="kw">\</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  <span class="kw">|</span> <span class="fu">sudo</span> gpg --dearmor -o <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="fu">sudo</span> install -d -m 0755 /etc/apt/keyrings</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="fu">sudo</span> curl -fsSL <span class="st">&quot;http://fantajeon.github.io/apple-apt-repo/ubuntu/public_key.asc&quot;</span> <span class="kw">\</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  <span class="kw">|</span> <span class="fu">sudo</span> gpg --dearmor -o <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="fu">sudo</span> chmod 0644 <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span></code></pre></div>
 <ol start="2" type="1">
 <li>Add an APT source list entry</li>
 </ol>
@@ -111,7 +113,7 @@
 <p>Remove key and source list:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="va">REPO_ID=</span>apple-apt</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="va">LIST=</span>/etc/apt/sources.list.d/<span class="va">${REPO_ID}</span>.list</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="va">KEYRING=</span>/usr/share/keyrings/<span class="va">${REPO_ID}</span>-archive-keyring.gpg</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="va">KEYRING=</span>/etc/apt/keyrings/<span class="va">${REPO_ID}</span>-archive-keyring.gpg</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="fu">sudo</span> rm -f <span class="st">&quot;</span><span class="va">$LIST</span><span class="st">&quot;</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="fu">sudo</span> rm -f <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
