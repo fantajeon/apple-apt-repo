@@ -47,12 +47,12 @@ sudo rm -f "$KEYRING"
 sudo apt update
 ```
 
-## 자세한 설정 가이드
+## Detailed Configuration Guide
 
-`apt-oauth2-proxy`의 상세한 설정 방법은 [설정 가이드](README_apt_oauth2_proxy.md)를 참조하세요.
+For detailed configuration of `apt-oauth2-proxy`, see the [Configuration Guide](README_apt_oauth2_proxy.md).
 
-### 주요 설정 항목
-- OAuth2 인증 설정
-- 프록시 서버 구성
-- 보안 설정
-- 모니터링 및 로깅
+### Key Configuration Items
+- OAuth2 Authentication Setup
+- Proxy Server Configuration
+- Security Settings
+- Monitoring and Logging
