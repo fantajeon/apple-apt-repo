@@ -4,30 +4,25 @@
 - Ubuntu 22.04 LTS (jammy), amd64
 
 ### Use over HTTP/HTTPS
-1) Install the repository public key (keyring)
+1) Configure APT keyring and source list
 ```bash
-KEYRING=/etc/apt/keyrings/apple-apt-archive-keyring.gpg
+REPO_ID=apple-apt
+ARCH=amd64
+CODENAME=jammy
+KEYRING=/etc/apt/keyrings/${REPO_ID}-archive-keyring.gpg
+LIST=/etc/apt/sources.list.d/${REPO_ID}.list
 
-sudo install -d -m 0755 /etc/apt/keyrings
+# Install repository public key (idempotent)
 sudo curl -fsSL "http://fantajeon.github.io/apple-apt-repo/ubuntu/public_key.asc" \
   | sudo gpg --dearmor -o "$KEYRING"
 sudo chmod 0644 "$KEYRING"
-```
 
-2) Add an APT source list entry
-```bash
-LIST=/etc/apt/sources.list.d/apple-apt.list
-echo "deb [arch=amd64 signed-by=$KEYRING] http://fantajeon.github.io/apple-apt-repo/ubuntu jammy main" \
+# Add APT source list entry
+echo "deb [arch=${ARCH} signed-by=${KEYRING}] http://fantajeon.github.io/apple-apt-repo/ubuntu ${CODENAME} main" \
   | sudo tee "$LIST"
 ```
 
-3) Update and install
-```bash
-sudo apt update
-sudo apt install apt-oauth2-proxy
-```
-
-Update and install (if needed again)
+2) Update and install
 ```bash
 sudo apt update
 sudo apt install apt-oauth2-proxy

@@ -85,38 +85,37 @@
 </ul>
 <h3 id="use-over-httphttps">Use over HTTP/HTTPS</h3>
 <ol type="1">
-<li>Install the repository public key (keyring)</li>
+<li>Configure APT keyring and source list</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="va">KEYRING=</span>/etc/apt/keyrings/apple-apt-archive-keyring.gpg</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="fu">sudo</span> install -d -m 0755 /etc/apt/keyrings</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="fu">sudo</span> curl -fsSL <span class="st">&quot;http://fantajeon.github.io/apple-apt-repo/ubuntu/public_key.asc&quot;</span> <span class="kw">\</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  <span class="kw">|</span> <span class="fu">sudo</span> gpg --dearmor -o <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="fu">sudo</span> chmod 0644 <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="va">REPO_ID=</span>apple-apt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="va">ARCH=</span>amd64</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="va">CODENAME=</span>jammy</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="va">KEYRING=</span>/etc/apt/keyrings/<span class="va">${REPO_ID}</span>-archive-keyring.gpg</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="va">LIST=</span>/etc/apt/sources.list.d/<span class="va">${REPO_ID}</span>.list</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="co"># Install repository public key (idempotent)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="fu">sudo</span> curl -fsSL <span class="st">&quot;http://fantajeon.github.io/apple-apt-repo/ubuntu/public_key.asc&quot;</span> <span class="kw">\</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>  <span class="kw">|</span> <span class="fu">sudo</span> gpg --dearmor -o <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="fu">sudo</span> chmod 0644 <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="co"># Add APT source list entry</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&quot;deb [arch=</span><span class="va">${ARCH}</span><span class="st"> signed-by=</span><span class="va">${KEYRING}</span><span class="st">] http://fantajeon.github.io/apple-apt-repo/ubuntu </span><span class="va">${CODENAME}</span><span class="st"> main&quot;</span> <span class="kw">\</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>  <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="st">&quot;</span><span class="va">$LIST</span><span class="st">&quot;</span></span></code></pre></div>
 <ol start="2" type="1">
-<li>Add an APT source list entry</li>
-</ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="va">LIST=</span>/etc/apt/sources.list.d/apple-apt.list</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&quot;deb [arch=amd64 signed-by=</span><span class="va">$KEYRING</span><span class="st">] http://fantajeon.github.io/apple-apt-repo/ubuntu jammy main&quot;</span> <span class="kw">\</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>  <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="st">&quot;</span><span class="va">$LIST</span><span class="st">&quot;</span></span></code></pre></div>
-<ol start="3" type="1">
 <li>Update and install</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">sudo</span> apt install apt-oauth2-proxy</span></code></pre></div>
-<p>Update and install (if needed again)</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">sudo</span> apt install apt-oauth2-proxy</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">sudo</span> apt install apt-oauth2-proxy</span></code></pre></div>
 <h3 id="verify">Verify</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">apt-cache</span> policy apt-oauth2-proxy</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="ex">apt-cache</span> policy apt-oauth2-proxy</span></code></pre></div>
 <h3 id="remove-cleanup">Remove (cleanup)</h3>
 <p>Remove key and source list:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="va">REPO_ID=</span>apple-apt</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="va">LIST=</span>/etc/apt/sources.list.d/<span class="va">${REPO_ID}</span>.list</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="va">KEYRING=</span>/etc/apt/keyrings/<span class="va">${REPO_ID}</span>-archive-keyring.gpg</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="fu">sudo</span> rm -f <span class="st">&quot;</span><span class="va">$LIST</span><span class="st">&quot;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="fu">sudo</span> rm -f <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="va">REPO_ID=</span>apple-apt</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="va">LIST=</span>/etc/apt/sources.list.d/<span class="va">${REPO_ID}</span>.list</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="va">KEYRING=</span>/etc/apt/keyrings/<span class="va">${REPO_ID}</span>-archive-keyring.gpg</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="fu">sudo</span> rm -f <span class="st">&quot;</span><span class="va">$LIST</span><span class="st">&quot;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="fu">sudo</span> rm -f <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
 <h2 id="detailed-configuration-guide">Detailed Configuration Guide</h2>
 <p>For detailed configuration of <code>apt-oauth2-proxy</code>, see the <a href="README_apt_oauth2_proxy.html">Configuration Guide</a>.</p>
 <h3 id="key-configuration-items">Key Configuration Items</h3>
