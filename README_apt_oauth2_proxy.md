@@ -79,7 +79,7 @@ APT_LOCAL_PATH_PREFIX=/repo
 
 **Auto-generated source file content:**
 ```bash
-deb [arch=<APT_SOURCE_ARCH> signed-by="/etc/apt/keyrings/<APT_SOURCE_SIGNED_BY>"] http://<PROXY_BIND>/repo <APT_SOURCE_DIST> <APT_SOURCE_COMPONENTS>
+deb [arch=<APT_SOURCE_ARCH> signed-by="/etc/apt/keyrings/$(basename <APT_SOURCE_SIGNED_BY>)"] http://<PROXY_BIND>/repo <APT_SOURCE_DIST> <APT_SOURCE_COMPONENTS>
 ```
 
 **GPG Keyring Auto Download:**
