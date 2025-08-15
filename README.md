@@ -46,3 +46,13 @@ sudo rm -f "$LIST"
 sudo rm -f "$KEYRING"
 sudo apt update
 ```
+
+## 자세한 설정 가이드
+
+`apt-oauth2-proxy`의 상세한 설정 방법은 [설정 가이드](README_apt_oauth2_proxy.md)를 참조하세요.
+
+### 주요 설정 항목
+- OAuth2 인증 설정
+- 프록시 서버 구성
+- 보안 설정
+- 모니터링 및 로깅
