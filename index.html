@@ -1,116 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apple APT Repository</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-            color: #111;
-            background: #fff;
-        }
-        .container {
-            max-width: 880px;
-            margin: 0 auto;
-            padding: 32px 20px 64px;
-        }
-        .readme h1, .readme h2, .readme h3 {
-            margin-top: 1.6em;
-        }
-        .readme pre {
-            background: #f6f8fa;
-            padding: 12px 14px;
-            overflow: auto;
-            border-radius: 6px;
-        }
-        .readme code {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        }
-        .muted {
-            color: #6a737d;
-        }
-        .breadcrumb {
-            margin-bottom: 20px;
-            padding: 10px 0;
-            border-bottom: 1px solid #e1e4e8;
-        }
-        .breadcrumb a {
-            color: #0366d6;
-            text-decoration: none;
-        }
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-        .breadcrumb .separator {
-            margin: 0 8px;
-            color: #6a737d;
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <div class="muted">Apple APT Repository</div>
-        <div class="breadcrumb">
-            <a href="#" onclick="loadReadme('README.md'); return false;">Home</a>
-        </div>
-        <div id="readme" class="readme">README.md 로드 중…</div>
-        <noscript>JavaScript가 비활성화되어 있어 README를 렌더링할 수 없습니다.</noscript>
-    </div>
-
-    <script>
-        // Markdown 링크를 클릭 가능한 링크로 변환하는 함수
-        function processMarkdownLinks(html, currentFile) {
-            // 마크다운 파일 링크를 찾아서 클릭 이벤트 추가
-            return html.replace(
-                /href="([^"]*\.md)"/g,
-                function(match, mdFile) {
-                    return `href="#" onclick="loadReadme('${mdFile}'); return false;"`;
-                }
-            );
-        }
-
-        // 마크다운 파일을 로드하고 렌더링하는 함수
-        function loadReadme(filename) {
-            const readmeElement = document.getElementById('readme');
-            const breadcrumbElement = document.querySelector('.breadcrumb');
-            
-            readmeElement.innerHTML = `${filename} 로드 중…`;
-            
-            // 브레드크럼 업데이트
-            if (filename === 'README.md') {
-                breadcrumbElement.innerHTML = '<a href="#" onclick="loadReadme(\'README.md\'); return false;">Home</a>';
-            } else {
-                breadcrumbElement.innerHTML = `
-                    <a href="#" onclick="loadReadme('README.md'); return false;">Home</a>
-                    <span class="separator">/</span>
-                    <a href="#" onclick="loadReadme('${filename}'); return false;">${filename}</a>
-                `;
-            }
-            
-            fetch(filename, { cache: 'no-cache' })
-                .then(function(response) {
-                    if (!response.ok) throw new Error('HTTP ' + response.status);
-                    return response.text();
-                })
-                .then(function(markdownText) {
-                    var html = marked.parse(markdownText, { mangle: false, headerIds: false });
-                    // 마크다운 링크를 클릭 가능하게 변환
-                    html = processMarkdownLinks(html, filename);
-                    readmeElement.innerHTML = html;
-                })
-                .catch(function(error) {
-                    readmeElement.innerHTML = `<p>${filename}을(를) 불러오지 못했습니다. 서버로 제공될 때 동작합니다.</p>`;
-                    if (window && window.console) console.error('Failed to load', filename, ':', error);
-                });
-        }
-
-        // 페이지 로드 시 README.md 표시
-        (function() {
-            loadReadme('README.md');
-        })();
-    </script>
+<h2 id="apt-repository-quickstart-for-users">APT repository quickstart (for users)</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Ubuntu 22.04 LTS (jammy), amd64</li>
+</ul>
+<h3 id="use-over-httphttps">Use over HTTP/HTTPS</h3>
+<ol type="1">
+<li>Install the repository public key (keyring)</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="va">KEYRING=</span>/usr/share/keyrings/apple-apt-archive-keyring.gpg</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="fu">sudo</span> curl -fsSL <span class="st">&quot;http://fantajeon.github.io/apple-apt-repo/ubuntu/public_key.asc&quot;</span> <span class="kw">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  <span class="kw">|</span> <span class="fu">sudo</span> gpg --dearmor -o <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span></code></pre></div>
+<ol start="2" type="1">
+<li>Add an APT source list entry</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="va">LIST=</span>/etc/apt/sources.list.d/apple-apt.list</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&quot;deb [arch=amd64 signed-by=</span><span class="va">$KEYRING</span><span class="st">] http://fantajeon.github.io/apple-apt-repo/ubuntu jammy main&quot;</span> <span class="kw">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>  <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="st">&quot;</span><span class="va">$LIST</span><span class="st">&quot;</span></span></code></pre></div>
+<ol start="3" type="1">
+<li>Update and install</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">sudo</span> apt install apt-oauth2-proxy</span></code></pre></div>
+<p>Update and install (if needed again)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">sudo</span> apt install apt-oauth2-proxy</span></code></pre></div>
+<h3 id="verify">Verify</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">apt-cache</span> policy apt-oauth2-proxy</span></code></pre></div>
+<h3 id="remove-cleanup">Remove (cleanup)</h3>
+<p>Remove key and source list:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="va">REPO_ID=</span>apple-apt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="va">LIST=</span>/etc/apt/sources.list.d/<span class="va">${REPO_ID}</span>.list</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="va">KEYRING=</span>/usr/share/keyrings/<span class="va">${REPO_ID}</span>-archive-keyring.gpg</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="fu">sudo</span> rm -f <span class="st">&quot;</span><span class="va">$LIST</span><span class="st">&quot;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="fu">sudo</span> rm -f <span class="st">&quot;</span><span class="va">$KEYRING</span><span class="st">&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
+<h2 id="detailed-configuration-guide">Detailed Configuration Guide</h2>
+<p>For detailed configuration of <code>apt-oauth2-proxy</code>, see the <a href="README_apt_oauth2_proxy.html">Configuration Guide</a>.</p>
+<h3 id="key-configuration-items">Key Configuration Items</h3>
+<ul>
+<li>OAuth2 Authentication Setup</li>
+<li>Proxy Server Configuration</li>
+<li>Security Settings</li>
+<li>Monitoring and Logging</li>
+</ul>
 </body>
 </html>
