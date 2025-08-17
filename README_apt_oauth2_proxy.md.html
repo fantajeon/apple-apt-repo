@@ -90,18 +90,18 @@
 <ol type="1">
 <li>Environment Configuration</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">sudo</span> cp /etc/apt-oauth2-proxy/.env.sample /etc/apt-oauth2-proxy/.env</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">sudo</span> vi /etc/apt-oauth2-proxy/.env</span></code></pre></div>
-<p>For example, basic environment configuration:</p>
-<pre class="dotenv"><code>OIDC_ISSUER=&lt;https://issuer.example.com/&gt;
-OIDC_CLIENT_ID=&lt;your-client-id&gt;
-OIDC_CLIENT_SECRET=&lt;your-secret&gt;
-PROXY_BIND=0.0.0.0:8900
-APT_SOURCE_URL=&lt;https://repo.example.com/apt&gt;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">sudo</span> install -d /etc/apt-oauth2-proxy</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">sudo</span> tee /etc/apt-oauth2-proxy/.env <span class="op">&gt;</span>/dev/null <span class="op">&lt;&lt;EOF</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>OIDC_ISSUER=&lt;https://issuer.example.com/&gt;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>OIDC_CLIENT_ID=&lt;your-client-id&gt;</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>OIDC_CLIENT_SECRET=&lt;your-secret&gt;</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>PROXY_BIND=0.0.0.0:8900</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>APT_SOURCE_URL=&lt;https://repo.example.com/apt&gt;</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="op">EOF</span></span></code></pre></div>
 <ol start="2" type="1">
 <li>Restart Service</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">sudo</span> systemctl restart apt-oauth2-proxy</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">sudo</span> systemctl restart apt-oauth2-proxy</span></code></pre></div>
 <h2 id="advanced-environment-configuration">Advanced Environment Configuration</h2>
 <p><strong>Additional option settings:</strong></p>
 <pre class="dotenv"><code># APT source auto-configuration
@@ -126,7 +126,7 @@ APT_LOCAL_PATH_PREFIX=/repo</code></pre>
 <h3 id="apt-source-configuration">APT Source Configuration</h3>
 <p><strong>Auto Configuration</strong>: When <code>APT_SOURCE_AUTOCONFIG=true</code> is set, apt-oauth2-proxy automatically creates <code>/etc/apt/sources.list.d/apt-oauth2-proxy.list</code> file on startup. All settings must be configured through the <code>.env</code> file.</p>
 <p><strong>Auto-generated source file content:</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="ex">deb</span> [arch=<span class="op">&lt;</span>APT_SOURCE_ARCH<span class="op">&gt;</span> signed-by=<span class="st">&quot;/etc/apt/keyrings/</span><span class="va">$(</span><span class="fu">basename</span> <span class="op">&lt;</span>APT_SOURCE_SIGNED_BY<span class="op">&gt;</span><span class="va">)</span><span class="st">&quot;</span>] http://<span class="op">&lt;</span>PROXY_BIND<span class="op">&gt;</span>/repo <span class="op">&lt;</span>APT_SOURCE_DIST<span class="op">&gt;</span> <span class="op">&lt;</span>APT_SOURCE_COMPONENTS<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">deb</span> [arch=<span class="op">&lt;</span>APT_SOURCE_ARCH<span class="op">&gt;</span> signed-by=<span class="st">&quot;/etc/apt/keyrings/</span><span class="va">$(</span><span class="fu">basename</span> <span class="op">&lt;</span>APT_SOURCE_SIGNED_BY<span class="op">&gt;</span><span class="va">)</span><span class="st">&quot;</span>] http://<span class="op">&lt;</span>PROXY_BIND<span class="op">&gt;</span>/repo <span class="op">&lt;</span>APT_SOURCE_DIST<span class="op">&gt;</span> <span class="op">&lt;</span>APT_SOURCE_COMPONENTS<span class="op">&gt;</span></span></code></pre></div>
 <p><strong>GPG Keyring Auto Download:</strong> - When <code>APT_SOURCE_SIGNED_BY</code> is specified as HTTPS URL, automatically downloads and saves keyring as local file - Save location: <code>/etc/apt/keyrings/&lt;filename&gt;</code> - No re-download if file already exists</p>
 <p><strong>Source format explanation:</strong> - <code>deb</code>: Binary package repository - <code>http://&lt;PROXY_BIND&gt;/repo</code>: Proxy server address (matches PROXY_BIND) - <code>/repo</code>: APT_LOCAL_PATH_PREFIX setting value - <code>&lt;APT_SOURCE_DIST&gt;</code>: APT_SOURCE_DIST setting value, distribution name (e.g., stable, testing, unstable) - <code>&lt;APT_SOURCE_COMPONENTS&gt;</code>: APT_SOURCE_COMPONENTS setting value, components (e.g., main, contrib, non-free)</p>
 <h3 id="usage">Usage</h3>

@@ -15,7 +15,7 @@ generate-packages:
 
 generate-html:
 	# Convert README.md to index.html
-	pandoc README.md -o index.html --standalone --css=style.css
+	pandoc README.md -o index.html --standalone --css=style.css --metadata title="Apple APT repository"
 	# Convert Markdown files to HTML, excluding files listed in .exclude_md
 	@for file in *.md; do \
 		if [ -f "$$file" ]; then \
