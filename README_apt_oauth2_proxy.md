@@ -30,7 +30,7 @@ sudo vi /etc/apt-oauth2-proxy/.env
 sudo systemctl restart apt-oauth2-proxy
 ```
 
-## Basic Configuration
+## Basic Environment Configuration
 
 **Minimum settings to get started:**
 ```dotenv
@@ -41,7 +41,7 @@ PROXY_BIND=0.0.0.0:8900
 APT_SOURCE_URL=<https://repo.example.com/apt>
 ```
 
-## Advanced Configuration
+## Advanced Environment Configuration
 
 **Additional option settings:**
 ```dotenv

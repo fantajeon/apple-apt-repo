@@ -96,14 +96,14 @@
 <li>Restart Service</li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">sudo</span> systemctl restart apt-oauth2-proxy</span></code></pre></div>
-<h2 id="basic-configuration">Basic Configuration</h2>
+<h2 id="basic-environment-configuration">Basic Environment Configuration</h2>
 <p><strong>Minimum settings to get started:</strong></p>
 <pre class="dotenv"><code>OIDC_ISSUER=&lt;https://issuer.example.com/&gt;
 OIDC_CLIENT_ID=&lt;your-client-id&gt;
 OIDC_CLIENT_SECRET=&lt;your-secret&gt;
 PROXY_BIND=0.0.0.0:8900
 APT_SOURCE_URL=&lt;https://repo.example.com/apt&gt;</code></pre>
-<h2 id="advanced-configuration">Advanced Configuration</h2>
+<h2 id="advanced-environment-configuration">Advanced Environment Configuration</h2>
 <p><strong>Additional option settings:</strong></p>
 <pre class="dotenv"><code># APT source auto-configuration
 APT_SOURCE_AUTOCONFIG=true
