@@ -92,17 +92,16 @@
 </ol>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">sudo</span> cp /etc/apt-oauth2-proxy/.env.sample /etc/apt-oauth2-proxy/.env</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">sudo</span> vi /etc/apt-oauth2-proxy/.env</span></code></pre></div>
-<ol start="2" type="1">
-<li>Restart Service</li>
-</ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">sudo</span> systemctl restart apt-oauth2-proxy</span></code></pre></div>
-<h2 id="basic-environment-configuration">Basic Environment Configuration</h2>
-<p><strong>Minimum settings to get started:</strong></p>
+<p>For example, basic environment configuration:</p>
 <pre class="dotenv"><code>OIDC_ISSUER=&lt;https://issuer.example.com/&gt;
 OIDC_CLIENT_ID=&lt;your-client-id&gt;
 OIDC_CLIENT_SECRET=&lt;your-secret&gt;
 PROXY_BIND=0.0.0.0:8900
 APT_SOURCE_URL=&lt;https://repo.example.com/apt&gt;</code></pre>
+<ol start="2" type="1">
+<li>Restart Service</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">sudo</span> systemctl restart apt-oauth2-proxy</span></code></pre></div>
 <h2 id="advanced-environment-configuration">Advanced Environment Configuration</h2>
 <p><strong>Additional option settings:</strong></p>
 <pre class="dotenv"><code># APT source auto-configuration

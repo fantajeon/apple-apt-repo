@@ -24,15 +24,8 @@ A lightweight reverse proxy that injects OIDC Client Credentials tokens to proxy
 sudo cp /etc/apt-oauth2-proxy/.env.sample /etc/apt-oauth2-proxy/.env
 sudo vi /etc/apt-oauth2-proxy/.env
 ```
+For example, basic environment configuration:
 
-2) Restart Service
-```bash
-sudo systemctl restart apt-oauth2-proxy
-```
-
-## Basic Environment Configuration
-
-**Minimum settings to get started:**
 ```dotenv
 OIDC_ISSUER=<https://issuer.example.com/>
 OIDC_CLIENT_ID=<your-client-id>
@@ -40,6 +33,12 @@ OIDC_CLIENT_SECRET=<your-secret>
 PROXY_BIND=0.0.0.0:8900
 APT_SOURCE_URL=<https://repo.example.com/apt>
 ```
+
+2) Restart Service
+```bash
+sudo systemctl restart apt-oauth2-proxy
+```
+
 
 ## Advanced Environment Configuration
 
